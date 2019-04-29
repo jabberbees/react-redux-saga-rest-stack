@@ -12,7 +12,6 @@ class ProtectedRoute extends React.Component {
     render() {
         const { isProtected, signUp, isAuthenticated, component: Component, ...rest } = this.props;
 
-        console.log("isAuthenticated: ", isAuthenticated);
         return (
             <Route
                 {...rest}

@@ -1,6 +1,21 @@
 import { call, put } from 'redux-saga/effects';
 import { signOut } from '../actions';
 
+export function putThunk(action, meta) {
+    return put({
+        ...action,
+        meta
+    });
+}
+
+export function putThunkError(action, meta) {
+    return put({
+        ...action,
+        error: true,
+        meta
+    });
+}
+
 export function* callApi(fn, ...args) {
     try {
         yield call(fn, ...args);

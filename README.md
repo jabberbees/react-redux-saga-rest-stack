@@ -13,6 +13,13 @@ While creating my first React single page app, I struggled to piece together a s
     - no dirty tricks
     - no singleton modules
 
+Later on I realised that in some cases I needed to know when a saga
+had completed or failed so I looked for a way to have dispatched 
+actions/sagas return a Promise.
+
+This is exactly what redux-saga-thunk does so I added an example to
+show how that works.
+
 This is what I found. Comments are very welcome.
 
 ## How to use

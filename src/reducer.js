@@ -1,11 +1,15 @@
 import { combineReducers } from 'redux';
+import { reducer as thunkReducer } from 'redux-saga-thunk'
+
 import {
   SIGN_OUT_REQUEST,
   SIGN_IN_SUCCESS,
   SIGN_IN_FAILURE,
   DO_SOMETHING_REQUEST,
   DO_SOMETHING_SUCCESS,
-  DO_SOMETHING_FAILURE
+  DO_SOMETHING_FAILURE,
+  DO_SOMETHING_WITH_PROMISE_SUCCESS,
+  DO_SOMETHING_WITH_PROMISE_FAILURE
 } from './actionTypes';
 
 const authInitialState = {
@@ -47,7 +51,7 @@ const apiReducer = (state = apiInitialState, action) => {
         working: true,
         error: null
       });
-    case DO_SOMETHING_SUCCESS:
+      case DO_SOMETHING_SUCCESS:
       return Object.assign({}, state, {
         working: false,
         error: null,
@@ -59,12 +63,21 @@ const apiReducer = (state = apiInitialState, action) => {
         error: action.payload,
         failures: state.failures+1
       });
+    case DO_SOMETHING_WITH_PROMISE_SUCCESS:
+      return Object.assign({}, state, {
+        successes: state.successes+1
+      });
+    case DO_SOMETHING_WITH_PROMISE_FAILURE:
+      return Object.assign({}, state, {
+        failures: state.failures+1
+      });
     default:
       return state;
   }
 };
 
 const reducer = combineReducers({
+  thunk: thunkReducer,
   auth: authReducer,
   api: apiReducer
 });
